@@ -1,0 +1,14 @@
+Mypy: https://mypy-lang.org/ : (Linting tool) static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
+
+# Tox is a generic virtualenv management and test command line tool. Its goal is to
+# standardize testing in Python. We will be using it extensively in this course.
+
+# Using Tox we can (on multiple operating systems):
+# + Eliminate PYTHONPATH challenges when running scripts/tests
+# + Eliminate virtualenv setup confusion
+# + Streamline steps such as model training, model publishing
+
+Building packages: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+
+.tox: Hidden directory where tox installs the virtual environments for different packages
+VERSION: Version the package wiith unique identifies
