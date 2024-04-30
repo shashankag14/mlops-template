@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, List, Optional, Sequence
+from typing import List, Optional
 
 from pydantic import BaseModel
 from strictyaml import YAML, load
@@ -40,6 +40,7 @@ class ModelConfig(BaseModel):
     test_size: float
     random_state: int
     alpha: float
+
 
 class Config(BaseModel):
     """Master config object."""

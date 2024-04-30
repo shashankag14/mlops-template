@@ -1,21 +1,22 @@
+import re
 import typing as t
 from pathlib import Path
 
-import re
 import joblib
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.pipeline import Pipeline
 
 from model import __version__ as _version
 from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
+
 def preprocess_dataset(*, dataframe: pd.DataFrame) -> pd.DataFrame:
-    
+
     def get_first_cabin(row):
         try:
             return row.split()[0]
-        except:
+        except ValueError:
             return np.nan
 
     def get_title(passenger):
@@ -42,6 +43,7 @@ def preprocess_dataset(*, dataframe: pd.DataFrame) -> pd.DataFrame:
     dataframe.drop(labels=config.model_config.vars_to_drop, axis=1, inplace=True)
 
     return dataframe
+
 
 def load_dataset(*, file_name: str) -> pd.DataFrame:
     dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
