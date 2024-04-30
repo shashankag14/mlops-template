@@ -39,7 +39,7 @@ def preprocess_dataset(*, dataframe: pd.DataFrame) -> pd.DataFrame:
     dataframe['fare'] = dataframe['fare'].astype('float')
     dataframe['age'] = dataframe['age'].astype('float')
 
-    # dataframe.drop(labels=[config.model_config.variables_to_drop], axis=1, inplace=True)
+    dataframe.drop(labels=config.model_config.vars_to_drop, axis=1, inplace=True)
 
     return dataframe
 

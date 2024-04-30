@@ -15,9 +15,6 @@ from model.config.core import config
 from model.processing.features import ExtractLetterTransformer
 
 titanic_pipe = Pipeline([
-    # Drop features which do not help in prediction
-    ("drop_features", DropFeatures(features_to_drop=[config.model_config.vars_to_drop])),
-
     # ===== IMPUTATION =====
     # impute categorical variables with string missing
     ('categorical_imputation', CategoricalImputer(
