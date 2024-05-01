@@ -20,7 +20,6 @@ def run_training() -> None:
         # for reproducibility
         random_state=config.model_config.random_state,
     )
-    y_train = np.log(y_train)
 
     # fit model (apply tranformations to the data and fit the model at the end)
     titanic_pipe.fit(X_train, y_train)
