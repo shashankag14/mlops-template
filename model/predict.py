@@ -8,8 +8,9 @@ from model.config.core import config
 from model.processing.data_manager import load_pipeline
 from model.processing.validation import validate_inputs
 
+# Loads the pipeline from the trained model saved in pickle format
 pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
-_titanic_pipe = load_pipeline(file_name=pipeline_file_name)
+_titanic_pipeline = load_pipeline(file_name=pipeline_file_name)
 
 
 def make_prediction(
@@ -23,7 +24,7 @@ def make_prediction(
     results = {"predictions": None, "version": _version, "errors": errors}
 
     if not errors:
-        predictions = _titanic_pipe.predict(
+        predictions = _titanic_pipeline.predict(
             X=validated_data[config.model_config.features]
         )
         results = {
