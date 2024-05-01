@@ -30,7 +30,6 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
     input_data['fare'] = input_data['fare'].astype('float')
     input_data['age'] = input_data['age'].astype('float')
 
-
     # convert syntax error field names (beginning with numbers)
     relevant_data = input_data[config.model_config.features].copy()
     validated_data = drop_na_inputs(input_data=relevant_data)

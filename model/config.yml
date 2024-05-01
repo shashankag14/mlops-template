@@ -13,6 +13,7 @@ pipeline_name: model
 pipeline_save_file: model_output_v
 
 features:
+  - pclass
   - sex
   - age
   - sibsp
