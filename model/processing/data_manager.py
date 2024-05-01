@@ -11,27 +11,26 @@ from model import __version__ as _version
 from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 
+def get_first_cabin(row):
+    try:
+        return row.split()[0]
+    except:
+        return np.nan
+
+def get_title(passenger):
+    line = passenger
+    if re.search('Mrs', line):
+        return 'Mrs'
+    elif re.search('Mr', line):
+        return 'Mr'
+    elif re.search('Miss', line):
+        return 'Miss'
+    elif re.search('Master', line):
+        return 'Master'
+    else:
+        return 'Other'
+
 def preprocess_dataset(*, dataframe: pd.DataFrame) -> pd.DataFrame:
-
-    def get_first_cabin(row):
-        try:
-            return row.split()[0]
-        except ValueError:
-            return np.nan
-
-    def get_title(passenger):
-        line = passenger
-        if re.search('Mrs', line):
-            return 'Mrs'
-        elif re.search('Mr', line):
-            return 'Mr'
-        elif re.search('Miss', line):
-            return 'Miss'
-        elif re.search('Master', line):
-            return 'Master'
-        else:
-            return 'Other'
-
     dataframe = dataframe.replace('?', np.nan)
 
     dataframe['cabin'] = dataframe['cabin'].apply(get_first_cabin)
