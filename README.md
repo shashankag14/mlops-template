@@ -8,14 +8,14 @@ To generate the distribution package for the model, we use [PyPA](https://packag
 #### Steps to build the model package:
 ##### 1. Make sure you have the latest version of PyPA’s build installed:
 
-```http
+```
   python3 -m pip install --upgrade build  # for Unix/macOS
   py -m pip install --upgrade build     # for Windows
 ```
 
 ##### 2. Run this command from the same directory where `pyproject.toml` is located:
 
-```http
+```
   python3 -m build  # for Unix/macOS
   py -m build     # for Windows
 ```

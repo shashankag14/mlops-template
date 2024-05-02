@@ -7,10 +7,10 @@ from setuptools import find_packages, setup
 
 # Package meta-data.
 NAME = 'survival-predictor-model'
-DESCRIPTION = "A template for creating MLOps project."
-URL = "https://github.com/trainindata/testing-and-monitoring-ml-deployments"
+DESCRIPTION = "A template for deploying ML model using MLOps."
+URL = "https://github.com/shashankag14/mlops-template"
 EMAIL = "shashankag14@gmail.com"
-AUTHOR = "ShashankAgarwal"
+AUTHOR = "Shashank Agarwal"
 REQUIRES_PYTHON = ">=3.6.0"
 
 
