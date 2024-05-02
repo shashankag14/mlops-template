@@ -8,7 +8,12 @@ Mypy: https://mypy-lang.org/ : (Linting tool) static type checker for Python tha
 # + Eliminate virtualenv setup confusion
 # + Streamline steps such as model training, model publishing
 
-Building packages: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+Building packages: https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives
+python3 -m pip install --upgrade build
+python3 -m build
 
 .tox: Hidden directory where tox installs the virtual environments for different packages
 VERSION: Version the package wiith unique identifies
+
+
+pydantic vs mypy?
