@@ -5,5 +5,5 @@ pydantic>=1.10.4,<1.12.0
 typing_extensions>=4.2.0,<5.0.0
 loguru>=0.5.3,<1.0.0
 # install the ML model as a package
-survival_predictor_model>=0.0.1
+survival-predictor-model>=0.1.0
 feature-engine>=1.0.2,<1.6.0  # breaking change in v1.6.0

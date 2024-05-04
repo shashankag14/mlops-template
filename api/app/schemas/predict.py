@@ -18,14 +18,14 @@ class TitanicDataInputs(BaseModel):
             "example": {
                 "inputs": [
                     {
-                        "Sex": "female",
-                        "Age": 20,
-                        "Sibsp": 0,
-                        "Parch": 2,
-                        "Fare": 78.9,
-                        "Cabin": "B",
-                        "Embarked": "Q",
-                        "Title": "Miss"
+                        "sex": "female",
+                        "age": 20,
+                        "sibsp": 0,
+                        "parch": 2,
+                        "fare": 78.9,
+                        "cabin": "B",
+                        "embarked": "Q",
+                        "title": "Miss"
                     }
                 ]
             }
