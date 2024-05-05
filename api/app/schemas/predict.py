@@ -18,6 +18,7 @@ class TitanicDataInputs(BaseModel):
             "example": {
                 "inputs": [
                     {
+                        "pclass": 0,
                         "sex": "female",
                         "age": 20,
                         "sibsp": 0,

@@ -16,11 +16,11 @@ api_router = APIRouter()
 
 
 @api_router.get("/survival", response_model=schemas.Survival, status_code=200)
-def health() -> dict:
+def survival() -> dict:
     """
     Root Get
     """
-    health = schemas.Health(
+    health = schemas.Survival(
         name=settings.PROJECT_NAME, api_version=__version__, model_version=model_version
     )
 
