@@ -30,7 +30,7 @@ def survival() -> dict:
 @api_router.post("/predict", response_model=schemas.PredictionResults, status_code=200)
 async def predict(input_data: schemas.TitanicDataInputs) -> Any:
     """
-    Make house price predictions with the TID regression model
+    Make titanic survival predictions with ML model
     """
 
     input_df = pd.DataFrame(jsonable_encoder(input_data.inputs))
