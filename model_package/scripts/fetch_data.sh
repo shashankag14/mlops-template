@@ -30,8 +30,7 @@ TRAIN_LINES=$((TOTAL_LINES * 80 / 100))
 HEADER=$(head -n 1 "$ORIGINAL_CSV")
 
 # Shuffle the dataset lines randomly (excluding header)
-awk 'BEGIN {srand()} NR>1 {print rand(), $0}' "$ORIGINAL_CSV" | sort -n | cut -d ' ' -f 2- > shuffled.csv
+# awk 'BEGIN {srand()} NR>1 {print rand(), $0}' "$ORIGINAL_CSV" | sort -n | cut -d ' ' -f 2- > shuffled.csv
 
 # Use awk to split the shuffled CSV file into two files (including header)
-awk -v header="$HEADER" -v train_lines="$TRAIN_LINES" 'NR == 1 { print header > "'"$TRAIN_CSV"'"; print header > "'"$TEST_CSV"'" } NR > 1 && NR <= train_lines+1 { print > "'"$TRAIN_CSV"'" } NR > train_lines+1 { print > "'"$TEST_CSV"'" }' shuffled.csv
-rm shuffled.csv
+awk -v header="$HEADER" -v train_lines="$TRAIN_LINES" 'NR == 1 { print header > "'"$TRAIN_CSV"'"; print header > "'"$TEST_CSV"'" } NR > 1 && NR <= train_lines+1 { print > "'"$TRAIN_CSV"'" } NR > train_lines+1 { print > "'"$TEST_CSV"'" }' "$ORIGINAL_CSV"
