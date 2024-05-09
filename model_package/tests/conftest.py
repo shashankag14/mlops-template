@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
 
-from model.processing.data_manager import load_dataset
 from model.config.core import config
+from model.processing.data_manager import load_dataset
 
 
 @pytest.fixture()

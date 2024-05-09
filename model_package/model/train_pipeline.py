@@ -1,4 +1,3 @@
-import numpy as np
 from config.core import config
 from pipeline import titanic_pipe
 from processing.data_manager import load_dataset, save_pipeline

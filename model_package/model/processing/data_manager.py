@@ -14,8 +14,9 @@ from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 def get_first_cabin(row):
     try:
         return row.split()[0]
-    except:
+    except Exception:
         return np.nan
+
 
 def get_title(passenger):
     line = passenger
@@ -29,6 +30,7 @@ def get_title(passenger):
         return 'Master'
     else:
         return 'Other'
+
 
 def preprocess_dataset(*, dataframe: pd.DataFrame) -> pd.DataFrame:
     dataframe = dataframe.replace('?', np.nan)

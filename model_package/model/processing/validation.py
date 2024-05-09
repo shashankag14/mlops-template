@@ -5,7 +5,6 @@ import pandas as pd
 from pydantic import BaseModel, ValidationError
 
 from model.config.core import config
-from model.processing.data_manager import get_first_cabin, get_title
 
 
 def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:

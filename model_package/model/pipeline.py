@@ -2,7 +2,11 @@
 from feature_engine.encoding import OneHotEncoder, RareLabelEncoder
 
 # for imputation
-from feature_engine.imputation import AddMissingIndicator, CategoricalImputer, MeanMedianImputer
+from feature_engine.imputation import (
+    AddMissingIndicator,
+    CategoricalImputer,
+    MeanMedianImputer
+)
 
 # to build the models
 from sklearn.linear_model import LogisticRegression
