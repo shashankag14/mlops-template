@@ -10,7 +10,8 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-Loguru, Pydantic, Railway, FastAPI, CircleCI
+Loguru, Pydantic, Railway, FastAPI, CircleCI, Gemfurry
+
 ## Observability (Tracking the logs)
 Python based [logging](https://docs.python.org/3/library/logging.html) module is a common way to to track events that happen when some software runs to provide observability about the code running. 
 
@@ -66,4 +67,9 @@ As soon as the project is deployed to Railway, the build is started which could 
 At the end, we get a server of our own (eg. `https://luminous-eagerness-production.up.railway.app/docs`) which could be accessed to run the ML app via web interface. 
 
 ## CI/CD 
-We use [CircleCI](https://circleci.com/product/) as the CI/CD platform in the project. This tool helps in automating the training, testing and deployment of the model in the cloud. It provides a seemless CI/CD by avoiding the use of commands via local terminal, instead runs the commands using the CirleCI configuration file. This leads to a minimal usage of manual labor in intergation and deployment and ultimately reduces the chances of error. (The other alternatives for CI/CD platfforms include Jenkins, GitLab CI and Travis CI, which are equally good.)
+We use [CircleCI](https://circleci.com/product/) as the CI/CD platform in the project. This tool helps in automating the training, testing and deployment of the model in the cloud. It provides a seemless CI/CD by avoiding the use of commands via local terminal, instead runs the commands using the CircleCI configuration file. This leads to a minimal usage of manual labor in integration and deployment, ultimately reducing the chances of error. (The other alternatives for CI/CD platfforms include Jenkins, GitLab CI and Travis CI, which are equally good.)
+
+## Publishing Python Packages
+In order to publish python packages, we have free servers like [PyPI](https://pypi.org/). However, there are scenarios where the packages shall be privately kept in servers to avoid public access. In such cases, we need rpivate servers wherein we could publish the packages. [Gemfurry](https://gemfury.com/) is one such cloud package repository which provides free service to publish our packages publicly as well as privately. 
+
+We use this hosted repository by providing the index URL of the repository to our `requirements.txt` file
