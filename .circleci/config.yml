@@ -59,7 +59,7 @@ jobs:
       - run:
           name: Deploy to Railway App (You must set RAILWAY_TOKEN env var)
           command: |
-            cd api && railway up --detach
+            cd api && railway up --service luminous-eagerness --detach
 
   test_and_upload_model:
     <<: *defaults
