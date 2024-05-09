@@ -66,4 +66,4 @@ As soon as the project is deployed to Railway, the build is started which could 
 At the end, we get a server of our own (eg. `https://luminous-eagerness-production.up.railway.app/docs`) which could be accessed to run the ML app via web interface. 
 
 ## CI/CD 
-We use [CircleCI](https://circleci.com/product/) as the CI/CD platform in the project. The other alternatives for CI/CD platfforms include Jenkins, GitLab CI and Travis CI, which are equally good. 
+We use [CircleCI](https://circleci.com/product/) as the CI/CD platform in the project. This tool helps in automating the training, testing and deployment of the model in the cloud. It provides a seemless CI/CD by avoiding the use of commands via local terminal, instead runs the commands using the CirleCI configuration file. This leads to a minimal usage of manual labor in intergation and deployment and ultimately reduces the chances of error. (The other alternatives for CI/CD platfforms include Jenkins, GitLab CI and Travis CI, which are equally good.)
