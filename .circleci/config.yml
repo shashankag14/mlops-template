@@ -289,12 +289,12 @@ workflows:
       - test_and_upload_model:
           <<: *tags_only
 
-      - deploy_app_container_via_railway:
-         filters:
-           branches:
-             only:
-               - master
-               - demo
+      # - deploy_app_container_via_railway:
+      #    filters:
+      #      branches:
+      #        only:
+      #          - master
+      #          - demo
 
 #  test-all:
 #    jobs:
