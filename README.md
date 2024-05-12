@@ -1,5 +1,5 @@
 # mlops-template
-A simple and flexible project template for MLOps.
+MLOps project template to integrate robust and reliable machine learning pipelines in production.
 
 
 ## Badges
@@ -9,6 +9,9 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 [![Railway](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+
+
+
 
 Loguru, Pydantic, Railway, FastAPI, CircleCI, Gemfurry
 
@@ -70,6 +73,34 @@ At the end, we get a server of our own (eg. `https://luminous-eagerness-producti
 We use [CircleCI](https://circleci.com/product/) as the CI/CD platform in the project. This tool helps in automating the training, testing and deployment of the model in the cloud. It provides a seemless CI/CD by avoiding the use of commands via local terminal, instead runs the commands using the CircleCI configuration file. This leads to a minimal usage of manual labor in integration and deployment, ultimately reducing the chances of error. (The other alternatives for CI/CD platfforms include Jenkins, GitLab CI and Travis CI, which are equally good.)
 
 ## Publishing Python Packages
-In order to publish python packages, we have free servers like [PyPI](https://pypi.org/). However, there are scenarios where the packages shall be privately kept in servers to avoid public access. In such cases, we need rpivate servers wherein we could publish the packages. [Gemfurry](https://gemfury.com/) is one such cloud package repository which provides free service to publish our packages publicly as well as privately. 
+In order to publish python packages, we have free servers like [PyPI](https://pypi.org/). However, there are scenarios where the packages shall be privately kept in servers to avoid public access. In such cases, we need private servers wherein we could publish the packages. [Gemfurry](https://gemfury.com/) is one such cloud package repository which provides free service to publish our packages publicly as well as privately. 
 
-We use this hosted repository by providing the index URL of the repository to our `requirements.txt` file
+We use this hosted repository by providing the index URL of the repository to our `requirements.txt` file, which is used by the `pip` module to install the our python package.
+
+## Docker
+![Docker in Practise](https://drek4537l1klr.cloudfront.net/miell/Figures/01fig02_alt.jpg)
+
+Docker provides the ability to package and run an application in a loosely isolated environment called a container. The isolation and security lets you run many containers simultaneously on a given host. Containers are lightweight and contain everything needed to run the application, so you don't need to rely on what's installed on the host. You can share containers while you work, and be sure that everyone you share with gets the same container that works in the same way.
+
+If you want to dig deep into the usage of Docker, I would suggest you to have a look at these two books:
+  - [Docker in Action](https://livebook.manning.com/book/docker-in-action-second-edition/) (for basics)
+  - [Docker in Practise](https://livebook.manning.com/book/docker-in-practice/) (for advanced usage)
+
+#### Docker v/s Virtual Machine
+Unlike virtual machines, Docker containers don’t use any hardware virtualization. Programs running inside Docker containers interface directly with the host’s Linux kernel. Many programs can run in isolation without running redundant operating systems or suffering the delay of full boot sequences. This is an important distinction. Docker is not a hardware virtualization technology. Instead, it helps you use the container technology already built into your operating system kernel.
+
+Virtual machines provide hardware abstractions so you can run operating systems. Containers are an operating system feature. So you can always run Docker in a virtual machine if that machine is running a modern Linux kernel. Docker for Mac and Windows users, and almost all cloud computing users, will run Docker inside virtual machines. **So these are really complementary technologies.**
+
+#### Deploying with Docker Container
+Follow below steps to use a Dcoker container to deploy the application. The `requirements.txt` of the applicaiton contains the `PIP_EXTRA_INDEX_URL` which serves as the link to the Gemfury private repository where our model package is located. The dcoker image is designed such that it first fetches all the required packages to run the application, and then runs the application. 
+
+```
+# add Docker path to local directory
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+
+# build docker image
+docker build --build-arg PIP_EXTRA_INDEX_URL=<Your-Gemfury-Token-Here> -t api:latest .
+
+# run docker container
+docker run -p 8001:8001 -e PORT=8001 api 
+```
