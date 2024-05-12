@@ -84,22 +84,22 @@ jobs:
           path: ./tests/reports/
 
 
-  # deploy_app_container_via_railway:
-  #   <<: *defaults
-  #   steps:
-  #     - setup_remote_docker:
-  #         # Supported versions: https://circleci.com/docs/2.0/building-docker-images/#docker-version
-  #         version: 20.10.18
-  #     - checkout:
-  #         path: ~/project/
-  #     - node/install:
-  #         node-version: '16.13'
-  #     - run: node --version
-  #     - run: npm i -g @railway/cli
-  #     - run:
-  #         name: Build and run Dockerfile (see https://docs.railway.app/deploy/dockerfiles)
-  #         command: |
-  #           cd section-08-deploying-with-containers && railway up --detach
+  deploy_app_container_via_railway:
+    <<: *defaults
+    steps:
+      - setup_remote_docker:
+          # Supported versions: https://circleci.com/docs/2.0/building-docker-images/#docker-version
+          version: 20.10.18
+      - checkout:
+          path: ~/project/
+      - node/install:
+          node-version: '16.13'
+      - run: node --version
+      - run: npm i -g @railway/cli
+      - run:
+          name: Build and run Dockerfile (see https://docs.railway.app/deploy/dockerfiles)
+          command: |
+            cd api && railway up --service luminous-eagerness --detach
 
   test_model_py37:
     docker:
@@ -180,57 +180,57 @@ jobs:
             chmod +x ./scripts/publish_model.sh
             ./scripts/publish_model.sh ./packages/survival_predictor_model/
 
-  differential_tests:
-    <<: *defaults
-    steps:
-      - checkout
-      - *prepare_venv
-      - run:
-          name: Capturing previous model predictions
-          command: |
-            . venv/bin/activate
-            pip install -r packages/ml_api/diff_test_requirements.txt
-            PYTHONPATH=./packages/ml_api python3 packages/ml_api/tests/capture_model_predictions.py
-      - run:
-          name: Runnning differential tests
-          command: |
-            . venv/bin/activate
-            pip install -r packages/ml_api/requirements.txt
-            py.test -vv packages/ml_api/tests -m differential
+  # differential_tests:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - *prepare_venv
+  #     - run:
+  #         name: Capturing previous model predictions
+  #         command: |
+  #           . venv/bin/activate
+  #           pip install -r packages/ml_api/diff_test_requirements.txt
+  #           PYTHONPATH=./packages/ml_api python3 packages/ml_api/tests/capture_model_predictions.py
+  #     - run:
+  #         name: Runnning differential tests
+  #         command: |
+  #           . venv/bin/activate
+  #           pip install -r packages/ml_api/requirements.txt
+  #           py.test -vv packages/ml_api/tests -m differential
 
-  build_and_push_to_heroku_docker:
-    <<: *defaults
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
-      - run:
-          name: Setup Heroku CLI
-          command: |
-            wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-      - run: 
-          name: Build and Push Image
-          command: |
-            make build-ml-api-heroku push-ml-api-heroku
-      - run: 
-          name: Release to Heroku
-          command: |
-            heroku container:release web --app $HEROKU_APP_NAME
+  # build_and_push_to_heroku_docker:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         docker_layer_caching: true
+  #     - run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
+  #     - run:
+  #         name: Setup Heroku CLI
+  #         command: |
+  #           wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  #     - run: 
+  #         name: Build and Push Image
+  #         command: |
+  #           make build-ml-api-heroku push-ml-api-heroku
+  #     - run: 
+  #         name: Release to Heroku
+  #         command: |
+  #           heroku container:release web --app $HEROKU_APP_NAME
 
-  publish_docker_image_to_aws:
-    <<: *defaults
-    working_directory: ~/project/packages/ml_models
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Publishing docker image to aws ECR
-          command: |
-            sudo pip install awscli
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
-            make build-ml-api-aws tag-ml-api push-ml-api-aws
-            aws ecs update-service --cluster ml-api-cluster --service custom-service --task-definition  first-run-task-definition --force-new-deployment
+  # publish_docker_image_to_aws:
+  #   <<: *defaults
+  #   working_directory: ~/project/packages/ml_models
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker
+  #     - run:
+  #         name: Publishing docker image to aws ECR
+  #         command: |
+  #           sudo pip install awscli
+  #           eval $(aws ecr get-login --no-include-email --region us-east-1)
+  #           make build-ml-api-aws tag-ml-api push-ml-api-aws
+  #           aws ecs update-service --cluster ml-api-cluster --service custom-service --task-definition  first-run-task-definition --force-new-deployment
 
   # train_and_upload_neural_network_model:
   #   docker:
@@ -289,11 +289,11 @@ workflows:
       - test_and_upload_model:
           <<: *tags_only
 
-      # - deploy_app_container_via_railway:
-      #    filters:
-      #      branches:
-      #        only:
-      #          - master
+      - deploy_app_container_via_railway:
+         filters:
+           branches:
+             only:
+               - master
       #          - demo
 
 #  test-all:
