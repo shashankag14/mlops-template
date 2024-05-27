@@ -287,7 +287,6 @@ workflows:
   deploy_pipeline:
     jobs:
       - test_app
-
       - deploy_app_to_railway:
           requires:
             - test_app # run test_app before deploying the app to Railway (PaaS)
@@ -295,21 +294,27 @@ workflows:
             branches:
               only:
                 - main
-      
       - test_model_py38
       - test_model_py37
-
       - differential_tests
-      
-      # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
-      - test_and_upload_model:
-          # requires:
-          #   - test_model_py38
-          #   - test_model_py37
-          #   - test_app
-          #   - differential_tests
-          <<: *tags_only
-
+      # # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
+      # - test_and_upload_model:
+      #     # requires:
+      #     #   - test_model_py38
+      #     #   - test_model_py37
+      #     #   - test_app
+      #     #   - differential_tests
+      #     <<: *tags_only
+      - train_and_upload_model:
+          requires:
+            - test_model_py38
+            - test_model_py37
+            - test_app
+            - differential_tests
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
       - deploy_app_container_via_railway
 
 

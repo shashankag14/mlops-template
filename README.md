@@ -2,9 +2,9 @@
 MLOps project template to integrate robust and reliable machine learning pipelines in production.
 
 
-## Badges
+## Insights from CircleCI
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/shashankag14/mlops-template/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/shashankag14/mlops-template/tree/main)
+CI/CD Status: [![CircleCI](https://dl.circleci.com/status-badge/img/gh/shashankag14/mlops-template/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/shashankag14/mlops-template/tree/main)
 
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/shashankag14/mlops-template/main/deploy_pipeline/badge.svg?window=30d)](https://app.circleci.com/insights/github/shashankag14/mlops-template/workflows/deploy_pipeline/overview?branch=main&reporting-window=last-30-days&insights-snapshot=true)
 

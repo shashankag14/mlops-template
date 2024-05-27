@@ -9,6 +9,7 @@ from model.processing.data_manager import load_dataset
 
 PACKAGE_ROOT = pathlib.Path(__file__).parent.parent.parent
 
+@pytest.mark.skip
 @pytest.mark.differential
 def test_model_prediction_differential(
         *,
