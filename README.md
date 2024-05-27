@@ -4,16 +4,11 @@ MLOps project template to integrate robust and reliable machine learning pipelin
 
 ## Badges
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/shashankag14/mlops-template/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/shashankag14/mlops-template/tree/main)
 
-[![Railway](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/shashankag14/mlops-template/main/deploy_pipeline/badge.svg?window=30d)](https://app.circleci.com/insights/github/shashankag14/mlops-template/workflows/deploy_pipeline/overview?branch=main&reporting-window=last-30-days&insights-snapshot=true)
 
-
-
-
-Loguru, Pydantic, Railway, FastAPI, CircleCI, Gemfurry
+Add bages for: Loguru, Pydantic, Railway, FastAPI, CircleCI, Gemfurry from [shields.io](https://shields.io/)
 
 ## Observability (Tracking the logs)
 Python based [logging](https://docs.python.org/3/library/logging.html) module is a common way to to track events that happen when some software runs to provide observability about the code running. 
