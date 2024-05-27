@@ -3,7 +3,7 @@ import pathlib
 import pytest
 import pandas as pd
 
-from model.config import config as model_config
+from model.config import core as model_config
 from model.predict import make_prediction
 from model.processing.data_manager import load_dataset
 
