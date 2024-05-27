@@ -4,13 +4,14 @@ Never run it locally or you will disrupt the
 differential test versioning logic.
 """
 
+import pathlib
 import pandas as pd
 
 from model.predict import make_prediction
 from model.processing.data_manager import load_dataset
 
-from api.app import config
 
+PACKAGE_ROOT = pathlib.Path(__file__).parent.parent.parent
 
 def capture_predictions() -> None:
     """Save the test data predictions to a CSV."""
@@ -28,7 +29,7 @@ def capture_predictions() -> None:
 
     # hack here to save the file to the model
     # package of the repo, not the installed package
-    predictions_df.to_csv(f'{config.PACKAGE_ROOT}/{save_file}')
+    predictions_df.to_csv(f'{PACKAGE_ROOT}/{save_file}')
 
 
 if __name__ == '__main__':

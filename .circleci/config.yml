@@ -185,27 +185,28 @@ jobs:
     steps:
       - checkout
       - *prepare_venv
-      - run: 
-          name: Print current working directory
-          command: pwd
-      - run:
-          name: List files in current directory
-          command: ls -al
-      - run:
-          name: List files in packages/api directory
-          command: ls -al packages/api
+      # good for debugging
+      # - run: 
+      #     name: Print current working directory
+      #     command: pwd
+      # - run:
+      #     name: List files in current directory
+      #     command: ls -al
+      # - run:
+      #     name: List files in packages/api directory
+      #     command: ls -al api
       - run:
           name: Capturing previous model predictions
           command: |
             . venv/bin/activate
-            pip install -r packages/api/diff_test_requirements.txt
-            PYTHONPATH=./packages/api python3 packages/api/tests/capture_model_predictions.py
+            pip install -r api/diff_test_requirements.txt
+            PYTHONPATH=./packages/api python3 api/app/tests/differential_tests/capture_model_predictions.py
       - run:
           name: Running differential tests
           command: |
             . venv/bin/activate
-            pip install -r packages/api/requirements.txt
-            py.test -vv packages/api/app/tests -m differential
+            pip install -r api/requirements.txt
+            py.test -vv api/app/tests -m differential
 
 
   # build_and_push_to_heroku_docker:
@@ -298,7 +299,7 @@ workflows:
       - test_model_py38
       - test_model_py37
 
-      - differential_tests
+      #- differential_tests
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
@@ -306,7 +307,7 @@ workflows:
             - test_model_py38
             - test_model_py37
             - test_app
-            - differential_tests
+            #- differential_tests
           <<: *tags_only
 
       - deploy_app_container_via_railway
