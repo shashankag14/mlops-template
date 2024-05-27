@@ -166,7 +166,7 @@ jobs:
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r packages/survival_predictor_model/requirements.txt
+            pip install -r packages/survival_predictor_model/requirements/requirements.txt
       - *fetch_data
       - run: 
           name: Train model
