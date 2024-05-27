@@ -173,12 +173,10 @@ jobs:
           command: |
             . venv/bin/activate
             PYTHONPATH=./packages/model python3 packages/survival_predictor_model/model/train_pipeline.py
-      - run: 
+      - run:
           name: Publish model to Gemfury
           command: |
-            . venv/bin/activate
-            chmod +x ./scripts/publish_model.sh
-            ./scripts/publish_model.sh ./packages/survival_predictor_model/
+            tox -e publish_model
 
   differential_tests:
     <<: *defaults
