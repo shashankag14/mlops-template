@@ -185,18 +185,21 @@ jobs:
     steps:
       - checkout
       - *prepare_venv
+      - run: 
+          name: Print current working directory
+          command: pwd
       - run:
           name: Capturing previous model predictions
           command: |
             . venv/bin/activate
-            pip install -r packages/ml_api/diff_test_requirements.txt
-            PYTHONPATH=./packages/ml_api python3 packages/api/tests/capture_model_predictions.py
+            pip install -r packages/api/diff_test_requirements.txt
+            PYTHONPATH=./packages/api python3 packages/api/tests/capture_model_predictions.py
       - run:
           name: Runnning differential tests
           command: |
             . venv/bin/activate
-            pip install -r packages/ml_api/requirements.txt
-            py.test -vv packages/ml_api/app/tests -m differential
+            pip install -r packages/api/requirements.txt
+            py.test -vv packages/api/app/tests -m differential
 
   # build_and_push_to_heroku_docker:
   #   <<: *defaults
