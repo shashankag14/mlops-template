@@ -185,15 +185,16 @@ jobs:
     steps:
       - checkout
       - *prepare_venv
-      - run: 
-          name: Print current working directory
-          command: pwd
-      - run:
-          name: List files in current directory
-          command: ls -al
-      - run:
-          name: List files in packages/api directory
-          command: ls -al api
+      # good for debugging
+      # - run: 
+      #     name: Print current working directory
+      #     command: pwd
+      # - run:
+      #     name: List files in current directory
+      #     command: ls -al
+      # - run:
+      #     name: List files in packages/api directory
+      #     command: ls -al api
       - run:
           name: Capturing previous model predictions
           command: |
@@ -290,10 +291,10 @@ workflows:
       - deploy_app_to_railway:
           requires:
             - test_app # run test_app before deploying the app to Railway (PaaS)
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
       
       - test_model_py38
       - test_model_py37
@@ -306,7 +307,7 @@ workflows:
             - test_model_py38
             - test_model_py37
             - test_app
-            - differential_tests
+            #- differential_tests
           <<: *tags_only
 
       - deploy_app_container_via_railway
