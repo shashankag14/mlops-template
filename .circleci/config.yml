@@ -196,7 +196,7 @@ jobs:
           command: |
             . venv/bin/activate
             pip install -r packages/api/requirements.txt
-            py.test -vv packages/api/tests -m differential
+            py.test -vv packages/api/app/tests -m differential
 
   # build_and_push_to_heroku_docker:
   #   <<: *defaults
@@ -285,15 +285,15 @@ workflows:
               only:
                 - main
       
-      - test_model_py37
-      - section_9_differential_tests
+      - test_model_py38
+      - differential_tests
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
           requires:
-            - test_model_py37
+            - test_model_py38
             - test_app
-            - section_9_differential_tests
+            - differential_tests
           <<: *tags_only
 
       - deploy_app_container_via_railway
