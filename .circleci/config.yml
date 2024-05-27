@@ -290,11 +290,11 @@ workflows:
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
-          <<: *tags_only
           requires:
             - test_model_py37
             - test_app
             - section_9_differential_tests
+          <<: *tags_only
 
       - deploy_app_container_via_railway
 
