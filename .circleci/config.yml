@@ -206,6 +206,7 @@ jobs:
           command: |
             . venv/bin/activate
             pip install -r api/requirements.txt
+            pip install -r api/test_requirements.txt
             py.test -vv api/app/tests -m differential
 
 
