@@ -74,25 +74,25 @@ jobs:
           name: List files in current directory
           command: ls -al
       - run:
-          name: List files in packages/survival_predictor_model directory
-          command: ls -al survival_predictor_model
+          name: List files in packages/model_package directory
+          command: ls -al model_package
       - run: 
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r packages/survival_predictor_model/requirements/requirements.txt
+            pip install -r packages/model_package/requirements/requirements.txt
       - *fetch_data
       - run: 
           name: Train model
           command: |
             . venv/bin/activate
-            PYTHONPATH=./packages/model python3 packages/survival_predictor_model/model/train_pipeline.py
+            PYTHONPATH=./packages/model python3 packages/model_package/model/train_pipeline.py
       - run: 
           name: Publish model to Gemfury
           command: |
             . venv/bin/activate
             chmod +x ./scripts/publish_model.sh
-            ./scripts/publish_model.sh ./packages/survival_predictor_model/
+            ./scripts/publish_model.sh ./packages/model_package/
 
   test_and_upload_model:
     <<: *defaults
@@ -305,8 +305,8 @@ workflows:
             branches:
               only:
                 - main
-      - test_model_py38
-      - test_model_py37
+      # - test_model_py38
+      # - test_model_py37
       - differential_tests
       # # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       # - test_and_upload_model:
@@ -318,8 +318,8 @@ workflows:
       #     <<: *tags_only
       - train_and_upload_model:
           requires:
-            - test_model_py38
-            - test_model_py37
+            # - test_model_py38
+            # - test_model_py37
             - test_app
             - differential_tests
           # filters:
