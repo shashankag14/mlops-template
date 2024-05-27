@@ -299,7 +299,7 @@ workflows:
       - test_model_py38
       - test_model_py37
 
-      #- differential_tests
+      - differential_tests
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
@@ -307,7 +307,7 @@ workflows:
           #   - test_model_py38
           #   - test_model_py37
           #   - test_app
-            #- differential_tests
+          #   - differential_tests
           <<: *tags_only
 
       - deploy_app_container_via_railway
