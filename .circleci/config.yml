@@ -293,7 +293,7 @@ workflows:
          filters:
            branches:
              only:
-               - master
+               - main
       #          - demo
 
 #  test-all:
