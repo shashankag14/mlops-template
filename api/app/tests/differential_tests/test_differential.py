@@ -1,13 +1,13 @@
 import math
-
+import pathlib
 import pytest
 import pandas as pd
 
 from model.config import config as model_config
 from model.predict import make_prediction
 from model.processing.data_manager import load_dataset
-from api import config
 
+PACKAGE_ROOT = pathlib.Path(__file__).parent.parent.parent
 
 @pytest.mark.differential
 def test_model_prediction_differential(
@@ -18,7 +18,7 @@ def test_model_prediction_differential(
     the current model with the previous model's results.
     """
     # Given
-    previous_model_df = pd.read_csv(f'{config.PACKAGE_ROOT}/{save_file}')
+    previous_model_df = pd.read_csv(f'{PACKAGE_ROOT}/{save_file}')
     previous_model_predictions = previous_model_df.predictions.values
     test_data = load_dataset(file_name=model_config.test_data_file)
     multiple_test_input = test_data[99:120]
