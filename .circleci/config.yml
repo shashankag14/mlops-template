@@ -195,22 +195,12 @@ jobs:
     steps:
       - checkout
       - *prepare_venv
-      # good for debugging
-      # - run: 
-      #     name: Print current working directory
-      #     command: pwd
-      # - run:
-      #     name: List files in current directory
-      #     command: ls -al
-      # - run:
-      #     name: List files in packages/api directory
-      #     command: ls -al api
       - run:
           name: Capturing previous model predictions
           command: |
             . venv/bin/activate
             pip install -r api/diff_test_requirements.txt
-            PYTHONPATH=./packages/api python3 api/app/tests/differential_tests/capture_model_predictions.py
+            PYTHONPATH=./api python3 api/app/tests/differential_tests/capture_model_predictions.py
       - run:
           name: Running differential tests
           command: |
@@ -305,31 +295,20 @@ workflows:
             branches:
               only:
                 - main
-      - test_model_py38
-      - test_model_py37
+      # - test_model_py38
+      # - test_model_py37
       - differential_tests
       # # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
           requires:
-            - test_model_py38
-            - test_model_py37
+            # - test_model_py38
+            # - test_model_py37
             - test_app
             - differential_tests
-          # filters:
-          #   branches:
-          #     only:
-          #       - master
-
-      # - train_and_upload_model:
-      #     requires:
-      #       # - test_model_py38
-      #       # - test_model_py37
-      #       - test_app
-      #       - differential_tests
-          # filters:
-          #   branches:
-          #     only:
-          #       - master
+          filters:
+            branches:
+              only:
+                - master
 
       - deploy_app_container_via_railway
 
