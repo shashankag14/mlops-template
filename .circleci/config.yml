@@ -195,16 +195,6 @@ jobs:
     steps:
       - checkout
       - *prepare_venv
-      # good for debugging
-      - run: 
-          name: Print current working directory
-          command: pwd
-      - run:
-          name: List files in current directory
-          command: ls -al
-      # - run:
-      #     name: List files in packages/api directory
-      #     command: ls -al api
       - run:
           name: Capturing previous model predictions
           command: |
@@ -315,17 +305,6 @@ workflows:
             # - test_model_py37
             - test_app
             - differential_tests
-          filters:
-            branches:
-              only:
-                - master
-
-      # - train_and_upload_model:
-      #     requires:
-      #       # - test_model_py38
-      #       # - test_model_py37
-      #       - test_app
-      #       - differential_tests
           # filters:
           #   branches:
           #     only:
