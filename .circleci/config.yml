@@ -29,8 +29,8 @@ fetch_data: &fetch_data
     name: Set script permissions and fetch data
     command: |
       source venv/bin/activate
-      chmod +x ./scripts/fetch_data.sh
-      ./scripts/fetch_data.sh
+      chmod +x model_package/scripts/fetch_data.sh
+      model_package/scripts/fetch_data.sh
 
 jobs:
   test_app:
