@@ -74,25 +74,25 @@ jobs:
           name: List files in current directory
           command: ls -al
       - run:
-          name: List files in packages/model_package directory
+          name: List files in model_package directory
           command: ls -al model_package
       - run: 
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r packages/model_package/requirements/requirements.txt
+            pip install -r model_package/requirements/requirements.txt
       - *fetch_data
       - run: 
           name: Train model
           command: |
             . venv/bin/activate
-            PYTHONPATH=./packages/model python3 packages/model_package/model/train_pipeline.py
+            PYTHONPATH=./packages/model python3 model_package/model/train_pipeline.py
       - run: 
           name: Publish model to Gemfury
           command: |
             . venv/bin/activate
             chmod +x ./scripts/publish_model.sh
-            ./scripts/publish_model.sh ./packages/model_package/
+            ./scripts/publish_model.sh ./model_package/
 
   test_and_upload_model:
     <<: *defaults
