@@ -17,3 +17,5 @@ VERSION: Version the package wiith unique identifies
 
 
 pydantic vs mypy?
+
+REST API: https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/

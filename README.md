@@ -77,6 +77,11 @@ In order to publish python packages, we have free servers like [PyPI](https://py
 
 We use this hosted repository by providing the index URL of the repository to our `requirements.txt` file, which is used by the `pip` module to install the our python package.
 
+## Differential test
+A differential test compares the predictions between two different versions of a machine learning model. In cases where accuracy is really important, these type of tests are crucial in detecting subtle and insidious issues that do not cause any exceptions or failures in the code, but vcould be ignored in the usual testing scenario where the predcitions for the same input have been affected. A naive example for such a scenrio could be that the new machine learning model migth be missing a preprocessing step, or missing out a feature etc. Differential testing is all about catching such issues in the model before it goes into production. 
+
+We perform differetnial test in this rpoject using [PyTest](https://docs.pytest.org/en/latest/how-to/mark.html).
+
 ## Docker
 ![Docker in Practise](https://drek4537l1klr.cloudfront.net/miell/Figures/01fig02_alt.jpg)
 

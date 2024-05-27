@@ -50,3 +50,5 @@ categorical_vars:
 
 vars_to_extract_letter:
   - cabin
+
+ACCEPTABLE_MODEL_DIFFERENCE: 0.05
