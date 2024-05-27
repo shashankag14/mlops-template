@@ -1,11 +1,14 @@
 import logging
 import sys
+import pathlib
 from types import FrameType
 from typing import List, cast
 
 from loguru import logger
 from pydantic import AnyHttpUrl, BaseSettings
 
+# path to the root directory of the package
+PACKAGE_ROOT = pathlib.Path(__file__).parent.parent
 
 class LoggingSettings(BaseSettings):
     LOGGING_LEVEL: int = logging.INFO  # logging levels are type int
