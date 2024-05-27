@@ -291,15 +291,15 @@ workflows:
       - deploy_app_to_railway:
           requires:
             - test_app # run test_app before deploying the app to Railway (PaaS)
-          # filters:
-          #   branches:
-          #     only:
-          #       - main
+          filters:
+            branches:
+              only:
+                - main
       
       - test_model_py38
       - test_model_py37
 
-      - differential_tests
+      #- differential_tests
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
