@@ -129,10 +129,10 @@ jobs:
             pip install --user tox
             tox -e py38
 
-  test_ml_api_py37:
+  test_api_py37:
     docker:
       - image: circleci/python:3.7.6
-    working_directory: ~/project/packages/ml_api
+    working_directory: ~/project/packages/api
     steps:
       - checkout:
           path: ~/project
@@ -143,10 +143,10 @@ jobs:
             pip install --user tox
             tox -e py37
 
-  test_ml_api_py38:
+  test_api_py38:
     docker:
       - image: circleci/python:3.8.1
-    working_directory: ~/project/packages/ml_api
+    working_directory: ~/project/packages/api
     steps:
       - checkout:
           path: ~/project
@@ -189,17 +189,24 @@ jobs:
           name: Print current working directory
           command: pwd
       - run:
+          name: List files in current directory
+          command: ls -al
+      - run:
+          name: List files in packages/api directory
+          command: ls -al packages/api
+      - run:
           name: Capturing previous model predictions
           command: |
             . venv/bin/activate
             pip install -r packages/api/diff_test_requirements.txt
             PYTHONPATH=./packages/api python3 packages/api/tests/capture_model_predictions.py
       - run:
-          name: Runnning differential tests
+          name: Running differential tests
           command: |
             . venv/bin/activate
             pip install -r packages/api/requirements.txt
             py.test -vv packages/api/app/tests -m differential
+
 
   # build_and_push_to_heroku_docker:
   #   <<: *defaults
@@ -289,12 +296,15 @@ workflows:
                 - main
       
       - test_model_py38
+      - test_model_py37
+
       - differential_tests
       
       # Whenever a tag is created on github, trigger the below command. (Useful while doing the releases)
       - test_and_upload_model:
           requires:
             - test_model_py38
+            - test_model_py37
             - test_app
             - differential_tests
           <<: *tags_only
