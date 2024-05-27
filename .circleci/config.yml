@@ -305,10 +305,10 @@ workflows:
             # - test_model_py37
             - test_app
             - differential_tests
-          # filters:
-          #   branches:
-          #     only:
-          #       - master
+          filters:
+            branches:
+              only:
+                - master
 
       - deploy_app_container_via_railway
 

@@ -3,13 +3,13 @@ import pathlib
 import pytest
 import pandas as pd
 
-from model.config.core import config#, ACCEPTABLE_MODEL_DIFFERENCE
+from model.config.core import config, ACCEPTABLE_MODEL_DIFFERENCE
 from model.predict import make_prediction
 from model.processing.data_manager import load_dataset
 
 PACKAGE_ROOT = pathlib.Path(__file__).parent.parent.parent
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @pytest.mark.differential
 def test_model_prediction_differential(
         *,
