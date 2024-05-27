@@ -92,7 +92,7 @@ jobs:
           command: |
             . venv/bin/activate
             chmod +x ./scripts/publish_model.sh
-            ./scripts/publish_model.sh ./model_package/
+            model_package/scripts/publish_model.sh ./model_package/
 
   test_and_upload_model:
     <<: *defaults
