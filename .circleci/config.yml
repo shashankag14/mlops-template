@@ -199,7 +199,7 @@ jobs:
           command: |
             . venv/bin/activate
             pip install -r api/diff_test_requirements.txt
-            PYTHONPATH=./packages/api python3 api/app/tests/differential_test/capture_model_predictions.py
+            PYTHONPATH=./packages/api python3 api/app/tests/differential_tests/capture_model_predictions.py
       - run:
           name: Running differential tests
           command: |
