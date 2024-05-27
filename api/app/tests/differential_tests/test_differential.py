@@ -3,7 +3,7 @@ import pathlib
 import pytest
 import pandas as pd
 
-from model.config.core import config, ACCEPTABLE_MODEL_DIFFERENCE
+from model.config.core import config
 from model.predict import make_prediction
 from model.processing.data_manager import load_dataset
 
@@ -47,4 +47,4 @@ def test_model_prediction_differential(
         # rel_tol=0.05.
         assert math.isclose(previous_value,
                             current_value,
-                            rel_tol=ACCEPTABLE_MODEL_DIFFERENCE)
+                            rel_tol=0.05)
