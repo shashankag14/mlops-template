@@ -60,6 +60,39 @@ jobs:
           name: Deploy to Railway App (You must set RAILWAY_TOKEN env var)
           command: |
             cd api && railway up --service luminous-eagerness --detach
+  
+  train_and_upload_model:
+    <<: *defaults
+    steps:
+      - checkout
+      - *prepare_venv
+      # good for debugging
+      - run: 
+          name: Print current working directory
+          command: pwd
+      - run:
+          name: List files in current directory
+          command: ls -al
+      - run:
+          name: List files in packages/survival_predictor_model directory
+          command: ls -al survival_predictor_model
+      - run: 
+          name: Install requirements
+          command: |
+            . venv/bin/activate
+            pip install -r packages/survival_predictor_model/requirements/requirements.txt
+      - *fetch_data
+      - run: 
+          name: Train model
+          command: |
+            . venv/bin/activate
+            PYTHONPATH=./packages/model python3 packages/survival_predictor_model/model/train_pipeline.py
+      - run: 
+          name: Publish model to Gemfury
+          command: |
+            . venv/bin/activate
+            chmod +x ./scripts/publish_model.sh
+            ./scripts/publish_model.sh ./packages/survival_predictor_model/
 
   test_and_upload_model:
     <<: *defaults
@@ -156,27 +189,6 @@ jobs:
             sudo pip install --upgrade pip
             pip install --user tox
             tox -e py38
-
-  train_and_upload_model:
-    <<: *defaults
-    steps:
-      - checkout
-      - *prepare_venv
-      - run: 
-          name: Install requirements
-          command: |
-            . venv/bin/activate
-            pip install -r packages/survival_predictor_model/requirements/requirements.txt
-      - *fetch_data
-      - run: 
-          name: Train model
-          command: |
-            . venv/bin/activate
-            PYTHONPATH=./packages/model python3 packages/survival_predictor_model/model/train_pipeline.py
-      - run:
-          name: Publish model to Gemfury
-          command: |
-            tox -e publish_model
 
   differential_tests:
     <<: *defaults
